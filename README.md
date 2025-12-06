@@ -36,13 +36,15 @@ L'applicazione integra tre diversi modelli di intelligenza artificiale tra cui p
 ![WhatsApp Image 2025-12-06 at 13 34 00](https://github.com/user-attachments/assets/e31b8ced-e314-4bea-be3b-c70bf14e8971)
 
 
-i risultati vengono ritornati in una sezione al di sotto del video , inoltre vi è l'aggiunta di un effetto blur che contorna il video sulla base della predizione:
+Il risultato del modello sono ritornati in una sezione al di sotto del video ,con l'aggiunta di un effetto blur che contorna il video sulla base della predizione:
 
-<img width="600" alt="image" src="https://github.com/user-attachments/assets/e689566d-964f-4c6b-9a24-da52dfdc8a47" />
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/e689566d-964f-4c6b-9a24-da52dfdc8a47" width="600" alt="image">
+</p>
 
 
 
-I risultati in fine sono mostrati con un campo con la predizione ricevuta dal modello scelto
+I risultati in fine sono mostrati con un campo con la predizione ricevuta dal modello scelto, tabella di mappatura (label,colore):
 
 ![WhatsApp Image 2025-12-06 at 13 34 44](https://github.com/user-attachments/assets/1523f4b2-1896-43f3-a227-7f9271fff72b)
 
