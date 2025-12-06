@@ -3,8 +3,10 @@
 Questo progetto implementa un sistema end-to-end per la classificazione di azioni umane in video, basato sull'analisi di sequenze temporali di landmark scheletrici.
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/e31b8ced-e314-4bea-be3b-c70bf14e8971" width="100%" alt="Fitness AI Analyzer Dashboard">
-</p>
+
+https://github.com/user-attachments/assets/a5419e99-785d-4aec-adb1-d938860eafb3
+
+ </p>
 
 ---
 
