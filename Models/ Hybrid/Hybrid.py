@@ -10,11 +10,11 @@ from sklearn.metrics import classification_report, confusion_matrix
 
 # ================= CONFIGURAZIONE =================
 
-PATH_CNN = "/content/drive/MyDrive/ModelOfMe/1D-CNN/1D_CNN_Pitorch/pytorch_cnn_V5_fold.pth"
-PATH_TCN = "/content/drive/MyDrive/ModelOfMe/TCN/tcn_mikes/v3/tcn_pro_v3.pth"
+PATH_CNN = " /// "
+PATH_TCN = " /// "
 
-CLASSES_PATH = "/content/drive/MyDrive/ModelOfMe/TCN/tcn_mikes/v3/classes_tcn_pro_v3.npy"
-CSV_TEST_PATH = "/content/drive/MyDrive/ModelOfMe/DataSet_inferenza/dataset_test_COMPLETO_Merged.csv"
+CLASSES_PATH = " /// "
+CSV_TEST_PATH = "///"
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
