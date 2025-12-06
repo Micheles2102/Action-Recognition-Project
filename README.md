@@ -47,3 +47,18 @@ i risultati vengono ritornati in una sezione al di sotto del video , inoltre vi 
 
 
 
+# Pose Exercise Dataset
+
+Questo repository contiene informazioni e strumenti per utilizzare il dataset di pose estimation e classificazione degli esercizi.  
+Il dataset completo è disponibile su **Kaggle** al seguente link:
+
+[Dataset su Kaggle](https://www.kaggle.com/datasets/michelerispo/dataproject-fitness-video-analyzer)
+
+### Contenuto del repository
+- README.md (questa descrizione)
+- Script di esempio / notebook per elaborare i dati
+- Eventuali file di preprocessing o utilità
+
+Per scaricare i video e i file principali del dataset, utilizzare il link sopra.
+
+
