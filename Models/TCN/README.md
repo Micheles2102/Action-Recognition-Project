@@ -32,7 +32,7 @@ Abbiamo scelto una **TCN (Temporal Convolutional Network)** perché, rispetto al
 
 
 
-[Image of dilated convolution neural network architecture]
+
 
 
 ### 🔧 Tuning degli Iperparametri
