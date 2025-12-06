@@ -2,6 +2,10 @@
 
 Questa sezione documenta l'architettura del client desktop sviluppato in **Electron**. L'applicazione funge da interfaccia utente per il sistema di classificazione video, permettendo l'upload dei file, la selezione del modello AI e la visualizzazione delle metriche di performance.
 
+https://github.com/user-attachments/assets/0ce094e7-67b6-42c0-b078-11d4d6922bef
+
+
+
 ---
 
 ## 🏗️ Panoramica dell'Architettura
@@ -13,6 +17,7 @@ L'applicazione segue il pattern **Electron standard** con una separazione netta 
 3.  **Renderer Process (`renderer.js` + UI):** La logica dell'interfaccia utente e la comunicazione HTTP con il server Python.
 
 ---
+
 
 ## 📂 Dettaglio Componenti
 
