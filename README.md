@@ -1,6 +1,8 @@
+# Progetto MachineLearning Action-Recognition-Project
+
 Questo progetto implementa un sistema end-to-end per la classificazione di azioni umane in video, basato sull'analisi di sequenze temporali di landmark scheletrici.
 
--Pipeline di Elaborazione
+## Pipeline di Elaborazione
 
 Feature Extraction: Utilizzo di MediaPipe Pose per l'estrazione frame-by-frame di 33 keypoints corporei (coordinate x, y, z).
 Preprocessing Dati:
@@ -8,7 +10,7 @@ Normalizzazione Spaziale: Centratura delle coordinate relativa al punto medio de
 Scaling: Normalizzazione basata sulla dimensione del torso per garantire invarianza alla distanza dalla camera.
 Resampling Temporale: Interpolazione lineare delle sequenze per ottenere input a lunghezza fissa (es. 180 frame).
 
-Architetture Neurali:
+## Architetture Neurali:
 1D-CNN (Convolutional Neural Network): Rete convoluzionale monodimensionale ottimizzata per l'estrazione di pattern locali nelle serie temporali.
 TCN (Temporal Convolutional Network): Modello avanzato con convoluzioni dilatate (dilated convolutions) e connessioni residuali per catturare dipendenze temporali a lungo termine e relazioni causali.
 Approccio Ibrido di cooperazione tra i modelli per le predizioni.
