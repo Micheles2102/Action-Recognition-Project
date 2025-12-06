@@ -42,6 +42,7 @@ i risultati vengono ritornati in una sezione al di sotto del video , inoltre vi 
 
 
 
+I risultati in fine sono mostrati con un campo con la predizione ricevuta dal modello scelto
 
 ![WhatsApp Image 2025-12-06 at 13 34 44](https://github.com/user-attachments/assets/1523f4b2-1896-43f3-a227-7f9271fff72b)
 
@@ -52,7 +53,7 @@ i risultati vengono ritornati in una sezione al di sotto del video , inoltre vi 
 Questo repository contiene informazioni e strumenti per utilizzare il dataset di pose estimation e classificazione degli esercizi.  
 Il dataset completo è disponibile su **Kaggle** al seguente link:
 
-[Dataset su Kaggle](https://www.kaggle.com/datasets/michelerispo/dataproject-fitness-video-analyzer)
+[Dataset su Kaggle]([https://www.kaggle.com/datasets/michelerispo/dataproject-fitness-video-analyzer](https://www.kaggle.com/datasets/michelerispo/machinelearning-project-pose-fitness-data-analisy/data))
 
 ### Contenuto del repository
 - README.md (questa descrizione)
