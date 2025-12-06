@@ -2,7 +2,7 @@
 
 Questa sezione documenta l'architettura del client desktop sviluppato in **Electron**. L'applicazione funge da interfaccia utente per il sistema di classificazione video, permettendo l'upload dei file, la selezione del modello AI e la visualizzazione delle metriche di performance.
 
-![WhatsApp Image 2025-12-06 at 13 34 44](https://github.com/user-attachments/assets/c9b6ff41-8c8a-451c-a632-062e2d97db99)
+![WhatsApp Image 2025-12-06 at 13 34 00](https://github.com/user-attachments/assets/f45ae9b8-1a79-47f5-a04e-9a8f23ede434)
 
 ---
 
