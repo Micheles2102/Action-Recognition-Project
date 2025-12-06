@@ -7,4 +7,4 @@ Questo Jupyter Notebook rappresenta la **relazione finale completa** ("Final Rep
 * 📝 **Spiegazione Teorica:** Dettagli sulle scelte architetturali e analisi dei passaggi.
 * 📊 **Risultati:** Visualizzazioni, grafici e metriche di valutazione.
 
-👉 **[Apri il Final Report](final%20report.ipynb)**
+👉 **[Apri il Final Report](Final%20Report.ipynb)**
