@@ -1,0 +1,16 @@
+{
+  "name": "fitness-video-analyzer",
+  "version": "1.0.0",
+  "description": "AI Fitness Video Analyzer",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev"
+  },
+  "keywords": ["electron", "fitness"],
+  "author": "Il Tuo Nome",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^28.0.0"
+  }
+}
