@@ -1,4 +1,4 @@
-# Progetto MachineLearning Action-Recognition-Project
+# ⚙️Machine Learning: Action-Recognition-Project⚙️
 
 Questo progetto implementa un sistema end-to-end per la classificazione di azioni umane in video, basato sull'analisi di sequenze temporali di landmark scheletrici.
 
