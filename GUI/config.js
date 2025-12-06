@@ -3,7 +3,7 @@
 // ============================================
 const CONFIG = {
     // ⚠️ URL AGGIORNATO DAL TUO TERMINALE ⚠️
-    SERVER_URL: 'https://anucleate-ollie-nonreticently.ngrok-free.dev',
+    SERVER_URL: 'INSERISCI_QUI_URL_NGROK',
     
     // Lascia invariato il resto
     ENDPOINTS: {
@@ -32,4 +32,5 @@ const CONFIG = {
     },
     REQUEST_TIMEOUT: 300000, // 5 minuti (sicuro per video pesanti)
     MAX_FILE_SIZE: 500 * 1024 * 1024
+
 };
