@@ -1,84 +1,52 @@
+# 📉 1D-CNN Baseline: Robust Pose Classification
 
-# Human Pose Classification: 1D-CNN vs TCN 🧠🏃‍♂️
+Questo repository contiene l'implementazione della nostra **Baseline 1D-CNN**. 
+Prima di sviluppare modelli complessi basati sulla dilatazione temporale (come TCN), abbiamo progettato questa rete convoluzionale standard per stabilire un punto di riferimento solido e statisticamente affidabile.
 
-Questa repository contiene due approcci di Deep Learning distinti per la classificazione di azioni umane basate su sequenze di Keypoints (Pose Estimation). L'obiettivo è confrontare una **Baseline 1D-CNN** con una più avanzata **Temporal Convolutional Network (TCN)**.
-
-Il dataset di input consiste in serie temporali di coordinate $(x, y, z)$ estratte da video (es. tramite MediaPipe), strutturate in finestre di **180 frames**.
-
----
-## 1. Modello 1: 1D-CNN (Baseline) 📉
-
-Questo script implementa una rete neurale convoluzionale standard ottimizzata per serie temporali, con un forte focus sulla robustezza della validazione.
-
-### 🛠 Caratteristiche Chiave:
-* **Architettura:** * 3 Blocchi Convoluzionali (Conv1d → BatchNorm → ReLU).
-    * **MaxPooling** progressivo per ridurre la dimensionalità temporale.
-    * **Global Average Pooling** finale per sintetizzare l'intera sequenza in un vettore di feature.
-* **Strategia di Training:** * Utilizza **Stratified K-Fold Cross-Validation (K=4)** per garantire che i risultati non dipendano da un singolo split fortunato.
-    * Implementa **Class Weights** nella Loss Function (`CrossEntropyLoss`) per gestire dataset sbilanciati.
-* **Data Augmentation:**
-    * Gaussian Noise.
-    * **Random Temporal Shift (Roll):** Sposta circolarmente la sequenza temporale per rendere il modello invariante al punto di inizio dell'azione.
-
-### ✅ Punti di Forza:
-* Robustezza statistica grazie al K-Fold.
-* Gestione esplicita dello sbilanciamento delle classi.
-* Modello leggero e veloce da addestrare.
+L'obiettivo di questo script non è solo la velocità, ma la **robustezza della validazione** su dataset sbilanciati.
 
 ---
 
-## 2. Modello 2: TCN - Temporal Convolutional Network (Advanced) 🚀
+## ⚙️ 1. Pipeline di Validazione Rigorosa
 
-Questo script implementa un'architettura allo stato dell'arte per le serie temporali, arricchita da tecniche di Feature Engineering.
+A differenza di approcci standard che dividono i dati una sola volta, abbiamo optato per una strategia a doppio livello per garantire che le metriche non siano frutto del caso.
 
-### 🛠 Caratteristiche Chiave:
-* **Feature Engineering (Velocity):** * Non usa solo le coordinate $(x, y, z)$. Calcola esplicitamente la **Velocità** (differenza tra frame $t$ e $t-1$).
-    * L'input raddoppia di dimensione (da 66 a **132 features**), fornendo alla rete informazioni dirette sulla dinamica del movimento.
-* **Architettura TCN:**
-    * **Dilated Convolutions:** Usa un fattore di dilatazione esponenziale ($d=1, 3, 9, 27...$) per espandere il campo recettivo (Receptive Field) e catturare dipendenze a lungo termine senza perdere risoluzione.
-    * **Causal Padding (Chomp1d):** Garantisce che il modello non "veda nel futuro" (no data leakage).
-    * **Residual Blocks:** Connessioni residuali per permettere un training più profondo e stabile.
-* **Data Augmentation Avanzata:**
-    * Oltre al rumore, implementa **Random Scaling (Zoom)**: simula il soggetto più vicino o più lontano dalla telecamera (fattore 0.9x - 1.1x).
+### 🛡️ Stratified K-Fold Cross-Validation
+Abbiamo implementato una **K-Fold (N=4)** stratificata.
+* **Perché?** Con dataset di video pose estimation, è facile avere uno split "fortunato" o "sfortunato".
+* **Come funziona:** Invece di addestrare un solo modello, ne addestriamo 4 diversi su porzioni diverse del dataset. La performance finale è la media di questi run. Questo ci dà una stima molto più realistica di come il modello si comporterà nel mondo reale.
 
-### ✅ Punti di Forza:
-* Capacità superiore di modellare relazioni temporali complesse.
-* Migliore generalizzazione su azioni dinamiche grazie all'input di velocità.
-* Invarianza alla distanza del soggetto (grazie allo scaling).
+### ⚖️ Gestione dello Sbilanciamento (Class Weights)
+Analizzando i dati, abbiamo notato che alcune classi erano meno frequenti di altre.
+* **La Soluzione:** Abbiamo calcolato i pesi delle classi (`compute_class_weight`) basandoci sulla frequenza nel training set.
+* **Impatto:** Questi pesi vengono passati alla Loss Function (`CrossEntropyLoss`). Se il modello sbaglia una classe rara, viene penalizzato molto di più rispetto a quando sbaglia una classe comune. Questo forza la rete a imparare anche le azioni meno rappresentate.
 
 ---
 
-## ⚔️ Confronto Tecnico: CNN vs TCN
+## 🏗️ 2. Architettura CNN 1D
 
-| Feature | 1D-CNN (Baseline) | TCN (Advanced) |
-| :--- | :--- | :--- |
-| **Input Data** | Coordinate Raw (66 features) | Coordinate + **Velocità** (132 features) |
-| **Architettura** | Standard Conv1d + MaxPool | Dilated Conv + Residual Conn. |
-| **Memory** | Breve termine (Local Patterns) | Lungo termine (Global Patterns) |
-| **Validazione** | Stratified K-Fold (4 Split) | Train/Test Split (80/20) |
-| **Augmentation** | Noise + Time Shift | Noise + **Scaling (Zoom)** |
-| **Loss Function** | Weighted CrossEntropy | Standard CrossEntropy |
-| **Optimizer** | AdamW | AdamW + Weight Decay |
+Abbiamo progettato una rete leggera ma profonda a sufficienza per estrarre pattern spaziali dai keypoints.
+
+### 🔧 Struttura del Modello (`CNN1D_Advanced`)
+1.  **Input Layer:** Accetta le coordinate $(x, y, z)$ dei keypoints.
+2.  **Feature Extraction Blocks:** * 3 Blocchi consecutivi di `Conv1d` (64 $\to$ 128 $\to$ 256 filtri).
+    * Ogni blocco è seguito da `BatchNorm1d` (per stabilità) e `ReLU`.
+    * **MaxPooling:** Riduce progressivamente la dimensione temporale, "riassumendo" il movimento.
+3.  **Global Pooling:** * Usiamo `AdaptiveAvgPool1d(1)` alla fine. Invece di appiattire (Flatten) tutti i dati, facciamo una media su tutto l'asse temporale rimanente. Questo rende il modello molto leggero e meno prono all'overfitting rispetto a strati Dense giganti.
+4.  **Dropout (0.5):** Abbiamo scelto un dropout aggressivo del 50% prima del classificatore finale per massimizzare la generalizzazione.
 
 ---
 
-## 📊 Performance e Output
+## 🚀 3. Data Augmentation & Training
 
-Entrambi gli script generano:
-* Salvataggio del modello migliore (`.pth`).
-* Salvataggio delle classi (`.npy`).
-* Grafici delle curve di Loss (Train vs Val).
+Per rendere il modello resiliente, abbiamo applicato trasformazioni specifiche direttamente nel `Dataset` PyTorch.
 
-Lo script **TCN** include inoltre alla fine del training:
-* **Classification Report** (Precision, Recall, F1-Score).
-* **Confusion Matrix** visualizzata con Seaborn.
+### 🌪️ Augmentation Strategy
+Attiva solo durante il training (`augment=True`):
+1.  **Gaussian Noise:** Aggiungiamo rumore ($\sigma=0.01$) alle coordinate per simulare l'imprecisione del rilevamento della telecamera.
+2.  **Temporal Shift (Roll):** * Shiftiamo l'intera sequenza temporale di $\pm 3$ frame a random.
+    * *Motivazione:* Un'azione non inizia sempre al frame 0 preciso. Il modello deve riconoscerla indipendentemente da un piccolo ritardo iniziale.
 
-## 📦 Requirements
-
-```txt
-pandas
-numpy
-torch
-scikit-learn
-matplotlib
-seaborn
+### 📉 Ottimizzazione
+* **Optimizer:** `AdamW` (LR = 0.0005). Un learning rate più basso rispetto alla TCN per garantire una convergenza più stabile data la natura del K-Fold.
+* **
